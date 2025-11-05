@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { ApiInfo, ApiResponse } from "@/types";
+import Image from "next/image";
+import { ApiResponse } from "@/types";
 
 export default function ArtistPage() {
     const searchParams = useSearchParams();
@@ -58,7 +59,7 @@ export default function ArtistPage() {
         return (
             <div className="p-8">
                 <h1 className="text-2xl font-bold mb-4">Loading...</h1>
-                <p>Searching for artworks by "{artistName}"</p>
+                <p>Searching for artworks by {artistName}</p>
             </div>
         );
     }
@@ -79,7 +80,7 @@ export default function ArtistPage() {
         return (
             <div className="p-8">
                 <h1 className="text-2xl font-bold mb-4">No Artworks Found</h1>
-                <p className="mb-4">No artworks found for artist "{artistName}".</p>
+                <p className="mb-4">No artworks found for artist {artistName}.</p>
                 <Link href="/" className="text-blue-600 hover:underline">
                     ← Back to Search
                 </Link>
@@ -99,9 +100,11 @@ export default function ArtistPage() {
                 {data.records.map((artwork, index) => (
                     <div key={artwork.id || index} className="border rounded p-4">
                         {artwork.primaryimageurl && (
-                            <img 
+                            <Image 
                                 src={artwork.primaryimageurl} 
                                 alt={artwork.title || "Artwork"}
+                                width={300}
+                                height={192}
                                 className="w-full h-48 object-cover mb-4 rounded"
                             />
                         )}

@@ -1,18 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
-import { ApiInfo } from "@/types";
-
-type ApiResponse = {
-  info: ApiInfo;
-  records: any[];
-  aggregations: Record<string, any>;
-}
+import { ApiResponse } from "@/types";
 
 export async function GET(request: NextRequest) {
     try {
         const { searchParams } = new URL(request.url);
         const artist = searchParams.get('artist');
         const apiKey = process.env.HARVARD_ART_MUSEUM_API_KEY;
-        const url = `https://api.harvardartmuseums.org/object?apikey=${apiKey}&person=${encodeURIComponent(artist)}&size=20`;
+        
+        const url = `https://api.harvardartmuseums.org/object?apikey=${apiKey}&person=${encodeURIComponent(artist)}&hasimage=1&imagepermissionlevel=0&size=20`;
+        
         
         const response = await fetch(url);
 

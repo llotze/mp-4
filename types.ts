@@ -10,6 +10,6 @@ export type ApiInfo = {
 
 export type ApiResponse = {
     info: ApiInfo;
-    records: any[];
-    aggregations: Record<string, any>;
+    records: unknown[];
+    aggregations: Record<string, unknown>;
 }
