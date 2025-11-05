@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { ApiResponse } from "@/types";
 
-export default function ArtistPage() {
+function ArtistPageContent() {
     const searchParams = useSearchParams();
     const artistName = searchParams.get('artist') || '';
     const [data, setData] = useState<ApiResponse | null>(null);
@@ -121,5 +121,18 @@ export default function ArtistPage() {
                 ))}
             </div>
         </div>
+    );
+}
+
+export default function ArtistPage() {
+    return (
+        <Suspense fallback={
+            <div className="p-8">
+                <h1 className="text-2xl font-bold mb-4">Loading...</h1>
+                <p>Preparing search results...</p>
+            </div>
+        }>
+            <ArtistPageContent />
+        </Suspense>
     );
 }
