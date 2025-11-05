@@ -1,4 +1,5 @@
 import ArtistPage from "@/components/ArtistPage";
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Results",
